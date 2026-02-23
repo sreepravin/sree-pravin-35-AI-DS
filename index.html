@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Personal Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background: radial-gradient(circle at top left, #dbeafe 0%, #f8fafc 45%, #cffafe 100%);
+            display: flex;
+            min-height: 100vh;
+            align-items: center;
+            justify-content: center;
+            padding: 18px;
+        }
+        
+        .container {
+            display: flex;
+            width: min(1200px, 96vw);
+            height: calc(100vh - 36px);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 24px 44px rgba(15, 23, 42, 0.18);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+        
+        .left-sidebar {
+            width: 30%;
+            background: linear-gradient(180deg, #0f172a 0%, #1e293b 55%, #334155 100%);
+            padding: 28px 18px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            overflow-y: auto;
+        }
+        
+        .right-content {
+            width: 70%;
+            background: linear-gradient(to bottom right, #ffffff 0%, #f8fafc 62%, #eef2ff 100%);
+            padding: 40px;
+            overflow-y: auto;
+            border-left: 1px solid #cbd5e1;
+        }
+    
+        .left-sidebar img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            display: block;
+            margin-bottom: 16px;
+            border: 3px solid #a5b4fc;
+            box-shadow: 0 0 26px rgba(129, 140, 248, 0.75);
+            text-align: center;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+                box-shadow: 0 0 30px rgb(253, 253, 255);
+            }
+            50% {
+                transform: translateY(-10px);
+                box-shadow: 0 0 30px rgb(0, 255, 247);
+            }
+        }
+        
+        nav h1 {
+            margin-top: 8px;
+            color: #f8fafc;
+            text-align: center;
+            margin-bottom: 18px;
+            font-size: 20px;
+            animation: glow 2s ease-in-out infinite;
+            letter-spacing: 0.4px;
+        }
+        
+        @keyframes glow {
+            0%, 100% {
+                color: #fff;
+                text-shadow: 0 0 10px rgba(230, 236, 230, 0.5);
+            }
+            50% {
+                color: #76ff03;
+                text-shadow: 0 0 20px rgba(76, 175, 80, 1);
+            }
+        }
+        
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 100%;
+        }
+        
+        nav ul li {
+            text-align: center;
+        }
+        
+        nav ul li a {
+            color: #f8fafc;
+            text-decoration: none;
+            font-size: 14px;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 8px;
+            border-radius: 10px;
+            transition: background-color 0.3s, transform 0.25s ease, box-shadow 0.25s ease;
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .nav-sub-logo {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 700;
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.22);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            flex-shrink: 0;
+        }
+        
+        nav ul li a:hover {
+            background-color: rgba(255, 255, 255, 0.18);
+            text-decoration: none;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 14px rgba(15, 23, 42, 0.22);
+        }
+        
+        .right-content h1,
+        .right-content h2,
+        .right-content h3 {
+            color: #0f172a;
+        }
+
+        .right-content h2 {
+            margin-top: 20px;
+            margin-bottom: 15px;
+        }
+
+        .right-content h1::before,
+        .right-content h2::before,
+        .right-content h3::before {
+            display: inline-flex;
+            width: 22px;
+            height: 22px;
+            margin-right: 8px;
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            background: #564caf;
+            color: #ffffff;
+            font-size: 12px;
+            vertical-align: middle;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .right-content h1::before {
+            content: "◆";
+            background: #7e43cb;
+        }
+
+        .right-content h2::before {
+            content: "●";
+            background: #2563eb;
+        }
+
+        .right-content h3::before {
+            content: "▲";
+            background: #059669;
+            font-size: 10px;
+        }
+        
+        .right-content p {
+            color: #475569;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .right-content section.About {
+            margin-bottom: 30px;
+        }
+
+        #about {
+            background: #ffffff;
+            border: 1px solid #dbeafe;
+            border-left: 6px solid #6366f1;
+            padding: 22px;
+            border-radius: 14px;
+            box-shadow: 0 10px 22px rgba(30, 41, 59, 0.08);
+            margin-bottom: 20px;
+        }
+
+        #about h1 {
+            color: #7e43cb;
+            margin-bottom: 12px;
+            font-size: 28px;
+        }
+
+        #skills {
+            background: #ffffff;
+            padding: 22px;
+            border-radius: 14px;
+            box-shadow: 0 10px 22px rgba(30, 41, 59, 0.08);
+            border: 1px solid #e2e8f0;
+        }
+
+        #skills h1 {
+            color: #151615;
+            margin-bottom: 15px;
+            font-size: 26px;
+        }
+
+        #skills > div {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border: 1px solid #dbeafe;
+            border-radius: 10px;
+            padding: 12px 14px;
+            margin-bottom: 12px;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        #skills > div:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 14px rgba(76, 175, 80, 0.2);
+        }
+
+        #skills h2 {
+            margin-top: 0;
+            margin-bottom: 8px;
+            color: #0a0b0a;
+            font-size: 16px;
+            letter-spacing: 0.3px;
+        }
+
+        #skills p {
+            margin-bottom: 0;
+            color: #4e5d52;
+        }
+
+        #projects-list,
+        #certifications-list {
+            background: #ffffff;
+            padding: 22px;
+            border-radius: 14px;
+            box-shadow: 0 10px 22px rgba(30, 41, 59, 0.08);
+            margin-bottom: 20px;
+            border: 1px solid #e2e8f0;
+        }
+
+        #objective-card,
+        #achievements-card,
+        #languages-card {
+            background: #ffffff;
+            padding: 22px;
+            border-radius: 14px;
+            box-shadow: 0 10px 22px rgba(30, 41, 59, 0.08);
+            margin-bottom: 20px;
+            border-top: 4px solid #6366f1;
+            border-left: 1px solid #e2e8f0;
+            border-right: 1px solid #e2e8f0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        #objective-card p {
+            margin-bottom: 0;
+            color: #374151;
+        }
+
+        #achievements-card ul,
+        #languages-card ul {
+            padding-left: 20px;
+            color: #374151;
+            line-height: 1.8;
+        }
+
+        #achievements-card li,
+        #languages-card li {
+            margin-bottom: 6px;
+        }
+
+        #projects-list h3 {
+            color: #1f2937;
+            margin-bottom: 8px;
+            font-size: 20px;
+        }
+
+        #projects-list p {
+            margin-bottom: 10px;
+        }
+
+        #projects-list .project-item {
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            padding: 14px;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+        }
+
+        #projects-list .project-item:last-child {
+            margin-bottom: 0;
+        }
+
+        #certifications-list h2 {
+            margin-top: 0;
+        }
+
+        #certifications-list ul {
+            padding-left: 20px;
+            color: #374151;
+            line-height: 1.8;
+        }
+
+        #certifications-list li {
+            margin-bottom: 6px;
+        }
+
+        #contact-card {
+            background: #ffffff;
+            padding: 22px;
+            border-radius: 14px;
+            box-shadow: 0 10px 22px rgba(30, 41, 59, 0.08);
+            border-left: 6px solid #0ea5e9;
+            border-top: 1px solid #e2e8f0;
+            border-right: 1px solid #e2e8f0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        #contact-card p {
+            margin-bottom: 10px;
+            color: #374151;
+        }
+
+        #contact-card a {
+            color: #1d4ed8;
+            text-decoration: none;
+            word-break: break-word;
+        }
+
+        #contact-card a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                height: auto;
+                padding: 10px;
+            }
+            
+            .container {
+                flex-direction: column;
+                height: auto;
+                width: 100%;
+                border-radius: 14px;
+            }
+            
+            .left-sidebar {
+                width: 100%;
+                height: auto;
+            }
+            
+            .right-content {
+                width: 100%;
+                height: auto;
+                padding: 22px 16px;
+            }
+            section.About {
+                width: 100%;
+                
+            }
+
+            #about,
+            #skills {
+                padding: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left-sidebar">
+            <nav>
+                <img src="1000021112.jpg">
+                <h1 class="name">Sree Pravin K I</h1>
+                <ul>
+                    <li><a href="#about"><span class="nav-sub-logo">A</span>About Me</a></li>
+                    <li><a href="#objective"><span class="nav-sub-logo">O</span>Objective</a></li>
+                    <li><a href="#projects"><span class="nav-sub-logo">P</span>Projects</a></li>
+                    <li><a href="#certifications"><span class="nav-sub-logo">C</span>Certifications</a></li>
+                    <li><a href="#achievements"><span class="nav-sub-logo">H</span>Highlights</a></li>
+                    <li><a href="#languages"><span class="nav-sub-logo">L</span>Languages</a></li>
+                    <li><a href="#contact"><span class="nav-sub-logo">T</span>Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+        
+        <div class="right-content">
+            <section class="About Me">
+                <div id="about">
+                <h1>About Me</h1>
+                <p>Hello, I’m Sree Pravin K I, a third-year AI & 
+                DS student learning full-stack 
+                development. I enjoy building scalable, 
+                user-friendly web applications and 
+                continuously improve my skills through 
+                hands-on projects and experimenting with 
+                new technologies.. </p>
+                </div>
+
+                <div id="objective-card">
+                    <h2 id="objective">Career Objective</h2>
+                    <p>To begin my career as a software developer in a growth-focused organization where I can apply my AI and full-stack learning, contribute to real-world products, and continuously improve through practical development experience.</p>
+                </div>
+
+                <div id="skills">
+                <h1>Skills</h1>
+                <div id="ft">
+                <h2>FRONTEND TECHNOLOGIES </h2>
+                <p>HTML, CSS, JavaScript, bootstrap</p>
+                </div>
+                <div id="bt">
+                <h2>BACKEND TECHNOLOGIES </h2>
+                <p>MySQL, MongoDB, GitHub </p>
+                </div>
+                <div id="pl">
+                <h2>PROGRAMMING LANGUAGES </h2>
+                <p>Python, Java</p>
+                </div>
+                <div id="as">
+                    <h2>ADDITIONAL SKILLS </h2>
+                    <p>Problem Solving, Team Collaboration, Communication</p>
+                </div>
+                <div id="education">
+                    <h2>EDUCATION </h2>
+                    <p>K.S. Rangasamy College of Technology 
+                        B-tech (Artificial intelligence and Data science) </p>
+                </div>
+                </div>
+            </section>
+            
+            <h2 id="projects">Academic Projects</h2>
+            <section id="projects-list">
+                <div class="project-item">
+                    <h3>Medicals Management System (HTML, CSS, JS)</h3>
+                    <p><strong>GitHub:</strong> sreepravin/web_technology</p>
+                    <p>The Medical Store Management System offers a secure and interactive platform for browsing, ordering, and managing medical products online.</p>
+                    <p>Built the frontend components.</p>
+                </div>
+
+                <div class="project-item">
+                    <h3>Car Booking System (Python – Console Project)</h3>
+                    <p><strong>GitHub:</strong> sreepravin/python_project (project.py)</p>
+                    <p>Designed a console-based booking system for car rentals.</p>
+                    <p>Implemented user authentication and reservation management.</p>
+                </div>
+            </section>
+
+            <section id="certifications-list">
+                <h2 id="certifications">Certifications</h2>
+                <ul>
+                    <li>NPTEL Joy of Computing – 70%</li>
+                    <li>NPTEL Big Data Computing – 69%</li>
+                    <li>Oracle Cloud Infrastructure 2025 Certified AI Foundations Associate Certification</li>
+                </ul>
+            </section>
+
+            <section id="achievements-card">
+                <h2 id="achievements">Highlights</h2>
+                <ul>
+                    <li>Built and presented academic projects using HTML, CSS, JavaScript, and Python.</li>
+                    <li>Completed multiple certified courses in computing and cloud AI foundations.</li>
+                    <li>Actively improving full-stack development through project-based learning.</li>
+                </ul>
+            </section>
+
+            <section id="languages-card">
+                <h2 id="languages">Languages Known</h2>
+                <ul>
+                    <li>English</li>
+                    <li>Tamil</li>
+                </ul>
+            </section>
+            
+            <h2 id="contact">Contact</h2>
+            <section id="contact-card">
+                <p><strong>Address:</strong> 56, Kadumankottai, Anthiyur (TK), Umareddiyur (PO), Ammapettai, Erode - 683311</p>
+                <p><strong>Phone:</strong> <a href="tel:+919342725175">+91 9342725175</a></p>
+                <p><strong>Email:</strong> <a href="mailto:Sreepravin103@gmail.com">Sreepravin103@gmail.com</a></p>
+                <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/sreepravin-k-i-46a22b290/" target="_blank">https://www.linkedin.com/in/sreepravin-k-i-46a22b290/</a></p>
+                <p><strong>GitHub:</strong> <a href="https://github.com/sreepravin" target="_blank">https://github.com/sreepravin</a></p>
+            </section>
+        </div>
+    </div>
+</body>
+</html>
